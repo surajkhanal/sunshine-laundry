@@ -1,0 +1,73 @@
+html, body {
+    height: 100%;
+    font-family: Roboto, sans-serif;
+    background-color: #F0F2F5;
+    font-size: 16px;
+}
+
+.login {
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.9),  rgba(255, 255, 255, 0.88)), url(../images/bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.system-title {
+    color: rgb(242, 133, 0);
+    font-weight: 800;
+    font-size: 22px;
+    // color: white;
+    // font-weight: 300;
+    letter-spacing: 1px;
+}
+.system-info {
+    color: #1A73E8;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+.card-login {
+    border: 0;
+    background-image: url(../images//logo.png);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+
+
+    .avatar {
+        width: 120px;
+        height: 120px;
+        overflow: hidden;
+        border-radius: 50%;
+        margin: 0 auto;
+        user-select: none;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+    }
+
+    .page-title {
+        font-family: inherit;
+        font-weight: 600;
+        color: rgba(0, 0, 0, 0.54);
+    }
+
+    .form-control {
+        border: 2px solid #ccc;
+        font-size: 14px;
+    }
+
+    .btn-warning {
+        padding: 0.4rem 2rem 0.3rem;
+        // min-width: 180px;
+        color: #fff;
+        background: #F28500;
+        border-color: transparent;
+
+        &:not(:disabled):not(.disabled):active {
+            background: darken($color: #F28500, $amount: 10);
+            color: #fff;
+        }
+       
+    }
+}
