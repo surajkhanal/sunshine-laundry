@@ -1,0 +1,69 @@
+.modal-dialog {
+    max-width: 500px;
+    margin: 1.75rem auto;
+}
+
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.3rem;
+    outline: 0;
+}
+
+.modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #dee2e6;
+    border-top-left-radius: calc(0.3rem - 1px);
+    border-top-right-radius: calc(0.3rem - 1px);
+}
+
+.modal-title {
+    margin-bottom: 0;
+    line-height: 1.6;
+}
+
+.modal-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: 1rem;
+}
+
+.text-center {
+    text-align: center !important;
+}
+.mb-3, .my-3 {
+    margin-bottom: 1rem !important;
+}
+.mb-2, .my-2 {
+    margin-bottom: 0.5rem !important;
+}
+
+.font-italic {
+    font-style: italic !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.invoice-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.invoice-table tr th,
+.invoice-table tr td {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    font-size: 14px;
+    padding: 8px;
+}

@@ -4,6 +4,7 @@
 <div class="container-fluid">
     <h2 class="page-title">Orders</h2>
     <hr>
+    @include('layouts.message')
     <div class="row">
         <div class="col-lg-12">
             <div class="action-row">
@@ -30,8 +31,13 @@
                             <td>{{ $order->created_at }}</td>
                             <td>{{ $order->order_status->order_status_name }}</td>
                             <td>{{ $order->user->user_name }} ({{$order->user->getUserID()}})</td>
-                            <td>
-                                <a href="" class="btn btn-primary btn-sm">View Details</a>
+                            <td class="d-flex align-items-center">
+                                <a href="/orders/{{$order->id}}" class="btn btn-primary btn-sm mr-1">View Details</a>
+                                <form action="{{action('OrderController@destroy', $order->id)}}" method="POST" onsubmit="return confirm('Are you sure to delete this?')">
+                                    @method('delete')
+                                    @csrf
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach

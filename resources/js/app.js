@@ -3,10 +3,10 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+window.$ = window.jQuery = require('jquery');
 
 require('./dataTables');
 
-window.$ = window.jQuery = require('jquery');
 
 // window.Popper = require('popper.js');
 
@@ -67,7 +67,7 @@ Vue.directive('select2', {
 
 
 $(document).ready(function () {
-    $('.table').DataTable();
+    $('.table:not(.nodt)').DataTable();
 
     $('.dropdown').click(function(){
 

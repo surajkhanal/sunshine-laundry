@@ -27,14 +27,13 @@
 </head>
 <body>
     @php
-        $route = Route::current()->uri;
-       
+        $route = Route::current()->uri
     @endphp
    
     <div class="page-wrapper {{$route}}" id="app">
         <header class="header">
             <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-            <a class="navbar-brand" href="#"><img src="{{asset('images/logo.png')}}"> Laundry Management System</a>
+                <a class="navbar-brand" href="#"><img src="{{asset('images/logo.png')}}"> Laundry Management System</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -75,13 +74,13 @@
                             <span>General</span>
                         </li>
                         <li class="">
-                            <a href="dashboard.html">
+                            <a href="/dashboard">
                                 <i class="fas fa-tachometer-alt"></i>
                                 <span>Dashboard</span>
                             </a>
 
                         </li>
-                        <li class="sidebar-dropdown">
+                        <li class="sidebar-dropdown {{ ($route == 'orders' || $route == 'orders/create' || $route == 'orders/{order}') ? 'active':'' }}">
                             <a href="#">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>Orders</span>
@@ -136,9 +135,11 @@
                                 </ul>
                             </div>
                         </li>
-                        <li>
-                            <a href="{{route('services.index')}}" class="{{ $route == 'services' ? 'active':'' }}"><i class="fas fa-cubes"></i> Services</a>
-                        </li>
+                        @can('manage-service', Auth::user())
+                            <li>
+                                <a href="{{route('services.index')}}" class="{{ $route == 'services' ? 'active':'' }}"><i class="fas fa-cubes"></i> Services</a>
+                            </li>
+                        @endcan
                         <li class="sidebar-dropdown {{ $route == 'invoices' ? 'active':'' }}"">
                             <a href="#">
                                 <i class="fa fa-list"></i>
@@ -153,7 +154,7 @@
                             </div>
                         </li>
                         <li class="active">
-                            <a href="reports.html">
+                            <a href="/reports">
                                 <i class="fa fa-chart-line"></i>
                                 <span>Reports</span>
                             </a>
@@ -162,7 +163,7 @@
                         <li class="header-menu">
                             <span>Settings</span>
                         </li>
-                       {{Gate::allows('manage-staff')}}
+                       
                       @can('manage-staff', Auth::user())
                         <li class="sidebar-dropdown">
                             <a href="#">
@@ -177,14 +178,10 @@
                                     <li>
                                         <a href="/staff">View Staffs</a>
                                     </li>
-                                    {{-- <li>
-                                        <a href="staff/staff-access.html">Manage Access</a>
-                                    </li> --}}
                                 </ul>
                             </div>
                         </li>
                       @endcan
-                        
                         <li>
                           @if(Auth::check())
                         <a href="/account-settings/{{Auth::id()}}/edit">
@@ -205,7 +202,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="{{ asset('js/app.js') }}" ></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script>
         $(".sidebar-dropdown > a").click(function () {
@@ -227,7 +224,7 @@
             }
         });
     </script>
-    <script src="{{ asset('js/app.js') }}" ></script>
+    
     @stack('scripts')
 </body>
 </html>

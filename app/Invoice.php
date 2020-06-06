@@ -17,4 +17,5 @@ class Invoice extends Model
     public function client() {
         return $this->belongsTo('App\Client', 'client_id');
     }
+
 }

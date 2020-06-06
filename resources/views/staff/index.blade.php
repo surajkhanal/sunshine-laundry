@@ -32,8 +32,8 @@
                             <td>{{ $staff->phone_number }}</td>
                             <td>{{ $staff->address }}</td>
                             <td>
-                                <a href="#" class="btn btn-sm btn-primary">Modify</a>
-                                <a href="#" class="btn btn-sm btn-">Disable</a>
+                                <a href="/staff/{{$staff->id}}/edit" class="btn btn-sm btn-primary">Edit</a>
+                                {{-- <a href="#" class="btn btn-sm btn-">Disable</a> --}}
                             </td>
                         </tr>
                         @endforeach

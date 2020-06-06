@@ -9,7 +9,8 @@
         <div class="col-lg-8">
             <div class="action-row">
                     <div class="form-row align-items-center" >
-                        <div class="form-group col-4 mb-0 mr-2 d-flex align-items-center flex-fill">
+                        <div class="form-group col-10 mb-0 mr-2 d-flex align-items-center flex-fill">
+                            <label for="client" class="col-3 mb-0">Select Client</label>
                             <select name="client_id" id="client" class="form-control"v-model="client" v-select2>
                                 @if(count($data['clients']) > 0)
                                     @foreach($data['clients'] as $client)
@@ -18,11 +19,11 @@
                                 @endif
                             </select>
                         </div>
-                        <div class="form-group col-4 mb-0 mr-2 d-flex align-items-center flex-fill">
+                        {{-- <div class="form-group col-4 mb-0 mr-2 d-flex align-items-center flex-fill">
                             <i class="fas fa-search"></i>
                             <input type="text" name="item_search" class="form-control border-0 bg-transparent" placeholder="Search item">
-                        </div>
-                        <button class="btn btn-primary btn-">Search</button>
+                        </div> --}}
+                        {{-- <button class="btn btn-primary btn-">Search</button> --}}
                     </div>
                     <hr>
             </div>
@@ -227,7 +228,7 @@
 
                 printInvoice: function() {
                     let prtContent = document.getElementById("invoiceModal");
-                    let WinPrint = window.open('', '', 'left=0,top=0,width=584,height=600,toolbar=0,scrollbars=0,status=0');
+                    let WinPrint = window.open('', '', 'left=0,top=0,width=1000,height=600,toolbar=0,scrollbars=0,status=0');
                     WinPrint.document.write('<html><head>');
                     WinPrint.document.write('<link rel="stylesheet" href="{{ asset('css/app.css') }}" media="all">');
                     WinPrint.document.write('</head><body class="print" onload="print(); close()">');
@@ -235,14 +236,15 @@
                     WinPrint.document.write('</body></html>');
                     WinPrint.document.close();
                     WinPrint.focus();
-                    this.saveInvoice();
+                    // this.saveInvoice();
                     // WinPrint.print();
                     // WinPrint.close();
                 },
 
                 saveInvoice: function() {
                     if(!this.client) {
-                        return alert('Please select the client');
+                        alert('Please select the client');
+                        return;
                     }
                     let url = '{{action('OrderController@store')}}';
                     let self = this;
@@ -252,16 +254,22 @@
                         data: {
                             orderedItems: self.itemsInCart,
                             client: self.client,
+                            services: self.services,
                             _token: $('meta[name=csrf-token]').attr('content')
                         },
                         beforeSend: function() {
                             self.isSubmitting = true;
                         },
                         success: function(res) {
-                            console.log(res);
+                            // console.log(res);
                             self.message = res.msg;
                             self.isSubmitting = false;
-                            $('#invoiceModal').modal('hide');
+                            $('#invoiceModal .close').click();
+                            $('.item').removeClass('added');
+                            self.itemsInCart = [];
+                            self.services = [];
+                            self.total = 0;
+                            self.client = null;
                         },
                         error: function(err) {  
                             console.log(err);

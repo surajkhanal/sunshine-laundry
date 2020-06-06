@@ -74,9 +74,9 @@ class StaffController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $staff)
     {
-        //
+        return redirect('/staff');
     }
 
     /**
@@ -85,9 +85,10 @@ class StaffController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $staff)
     {
-        //
+        
+        return view('staff.edit', compact('staff'));
     }
 
     /**
@@ -97,9 +98,71 @@ class StaffController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $staff)
     {
-        //
+        $rules = [];
+
+
+        if (!empty($request->input('user_name'))) {
+            $rules['user_name'] = 'string|max:255';
+        }
+
+        if (!empty($request->input('email'))) {
+            if ($staff->email != $request->input('email')) {
+                $rules['email'] = 'required|string|email|max:255|unique:users';
+            }
+        }
+
+        if (!empty($request->input('password'))) {
+            $rules['password'] = 'required|string|min:8';
+        }
+
+        if (!empty($request->input('phone_number'))) {
+            $rules['phone_number'] = 'required|string|min:9|max:10';
+        }
+
+        if (!empty($request->input('address'))) {
+            $rules['address'] = 'string';
+        }
+
+        // validate request if values are not empty
+        $request->validate($rules);
+
+
+        if (!empty($request->input('user_name'))) {
+            $staff->user_name = $request->input('user_name');
+        }
+
+        if (!empty($request->input('email'))) {
+            if ($staff->email != $request->input('email')) {
+                $staff->email = $request->input('email');
+            }
+        }
+
+        if (!empty($request->input('password'))) {
+            $staff->password = Hash::make($request->input('password'));
+        }
+
+        if (!empty($request->input('phone_number'))) {
+            $staff->phone_number = $request->input('phone_number');
+        }
+
+        if (!empty($request->input('address'))) {
+            $staff->address = $request->input('address');
+        }
+
+        if(!empty($request->input('status'))) {
+            if($request->input('status') == 'on') {
+                $staff->user_status = false;
+            } else {
+                
+                $staff->user_status = true;
+            }
+        }
+
+        $staff->update();
+
+        return redirect('/staff')->with('success', 'Staff info updated successfully');
     }
 
     /**

@@ -13,4 +13,8 @@ class Item extends Model
    {
        return sprintf('IT%03d', $this->id);
    }
+
+   public function orders() {
+       return $this->belongsToMany('App\Order', 'order_details', 'item_code', 'order_id');
+   }
 }

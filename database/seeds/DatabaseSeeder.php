@@ -15,7 +15,8 @@ class DatabaseSeeder extends Seeder
             UserTypeSeeder::class,
             UserSeeder::class,
             OrderStatusSeeder::class,
-            PaymentStatusSeeder::class
+            PaymentStatusSeeder::class,
+            ServiceSeeder::class
         ]);
     }
 }

@@ -23467,11 +23467,12 @@ module.exports = g;
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-__webpack_require__(/*! ./dataTables */ "./resources/js/dataTables.js");
+window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
-window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"); // window.Popper = require('popper.js');
+__webpack_require__(/*! ./dataTables */ "./resources/js/dataTables.js"); // window.Popper = require('popper.js');
 // window.Bootstrap = require('bootstrap');
 // require('./bootstrap');
+
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
@@ -23524,7 +23525,7 @@ Vue.directive('select2', {
   }
 });
 $(document).ready(function () {
-  $('.table').DataTable();
+  $('.table:not(.nodt)').DataTable();
   $('.dropdown').click(function () {
     $('.dropdown-menu').toggleClass('show');
   });

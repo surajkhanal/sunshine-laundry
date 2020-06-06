@@ -11427,6 +11427,10 @@ body {
   font-size: 14px;
 }
 
+.Paid {
+  background-color: #d6ffe7 !important;
+}
+
 .print .modal-dialog .modal-footer {
   display: none !important;
 }

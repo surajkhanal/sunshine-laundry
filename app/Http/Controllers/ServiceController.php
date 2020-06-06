@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('admin');
+    }
     /**
      * Display a listing of the resource.
      *

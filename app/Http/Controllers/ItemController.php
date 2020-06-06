@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -48,7 +52,7 @@ class ItemController extends Controller
         $item->item_name = $request->input('item_name');
         $item->price = $request->input('price');
         if($request->hasFile('item_image')) {
-            $path = $request->file('item_image')->store('/images');
+            $path = $request->file('item_image')->store('/images', ['disk' => 'public']);
             $item->item_image = $path;
         }
         $item->save();
@@ -95,7 +99,7 @@ class ItemController extends Controller
         $item->item_name = $request->input('item_name');
         $item->price = $request->input('price');
         if($request->hasFile('item_image')) {
-            $path = $request->file('item_image')->store('/images');
+            $path = $request->file('item_image')->store('/images', ['disk' => 'public']);
             $item->item_image = $path;
         }
         $item->save();

@@ -22,7 +22,7 @@ class CreateInvoicesTable extends Migration
             $table->timestamp('due_date')->nullable();
             $table->timestamps();
             $table->foreign('client_id')->references('id')->on('clients');
-            $table->foreign('order_id')->references('id')->on('orders');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreign('payment_status_id')->references('id')->on('payment_statuses');
         });
     }

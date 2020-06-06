@@ -25,13 +25,20 @@ class Order extends Model
         return $this->belongsTo('App\OrderStatus', 'order_status_id');
     }
 
-    public function order_details()
+    public function items()
     {
-        return $this->hasMany('App\OrderDetail', 'order_id');
+        return $this->belongsToMany('App\Item', 'order_details', 'order_id', 'item_code')
+            ->as('order_details')
+            ->withPivot('quantity')
+            ->withTimestamps();
     }
 
     public function invoice()
     {
         return $this->hasOne('App\Invoice', 'order_id');
+    }
+
+    public function services() {
+        return $this->belongsToMany('App\Service', 'order_services', 'order_id', 'service_id');
     }
 }

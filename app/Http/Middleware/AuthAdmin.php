@@ -20,12 +20,15 @@ class AuthAdmin
     {
         if(Auth::check()) {
             $user = Auth::user();
-            
-            if($user->userType->user_type_name == 'Staff') {
+            if($user->userType->user_type_name == 'Staff' && $user->user_status == 1) {
                 return redirect('/dashboard');
+            } else if($user->userType->user_type_name == 'Staff' && $user->user_status == 0) {
+                Auth::logout();
+                return redirect('/');
             }
             return $next($request);
         } else {
+            
             return redirect('/');
         }
     }
